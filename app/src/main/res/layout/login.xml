@@ -38,6 +38,7 @@
         android:layout_marginTop="72dp"
         android:background="@drawable/rounded"
         android:hint="Surel"
+        android:inputType="textEmailAddress"
         android:padding="8dp"
         android:elevation="4dp"
         />
@@ -53,6 +54,7 @@
         android:background="@drawable/rounded"
         android:elevation="4dp"
         android:hint="Kata sandi"
+        android:inputType="textPassword"
         android:padding="8dp" />
 
     <Button
@@ -67,73 +69,20 @@
         android:text="Masuk"
         android:textColor="@color/white"/>
 
-    <TextView
-        android:id="@+id/forgot"
-        android:layout_width="380dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/loginButton"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="16dp"
-        android:gravity="right"
-        android:text="Lupa kata sandi?"
-        android:textColor="#0A2C2A"
-        android:textSize="14sp"></TextView>
-
-    <TextView
-        android:id="@+id/orLogin"
-        android:layout_width="380dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/forgot"
-        android:layout_centerInParent="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="16dp"
-        android:gravity="center"
-        android:text="atau masuk menggunakan"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp">
-    </TextView>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/orLogin"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal">
-
-        <!-- Google Button -->
-        <FrameLayout
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/another_login">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/google"
-                android:layout_gravity="center"
-                android:scaleType="fitCenter" />
-        </FrameLayout>
-
-
-    </LinearLayout>
 
     <TextView
         android:id="@+id/register"
         android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/orLogin"
+        android:layout_below="@id/loginButton"
         android:layout_centerInParent="true"
         android:layout_marginStart="16dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="16dp"
         android:gravity="center"
-        android:text="Belum punya akun? daftar sekarang"
+        android:text="Belum punya akun? hubungi admin"
         android:textColor="#FFFFFF"
-        android:textSize="12sp"></TextView>
+        android:textSize="14sp"></TextView>
 
     <TextView
         android:id="@+id/tc"
@@ -147,6 +96,6 @@
         android:gravity="center"
         android:text="Dengan klik tombol masuk, anda setuju dengan syarat dan ketentuan kami"
         android:textColor="#FFFFFF"
-        android:textSize="12sp"></TextView>
+        android:textSize="14sp"></TextView>
 
 </RelativeLayout>
