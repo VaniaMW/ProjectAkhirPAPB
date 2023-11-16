@@ -37,7 +37,7 @@
         android:layout_below="@id/logoImageView"
         android:layout_marginTop="72dp"
         android:background="@drawable/rounded"
-        android:hint="Email"
+        android:hint="Surel"
         android:padding="8dp"
         android:elevation="4dp"
         />
@@ -52,7 +52,7 @@
         android:layout_marginEnd="16dp"
         android:background="@drawable/rounded"
         android:elevation="4dp"
-        android:hint="Password"
+        android:hint="Kata sandi"
         android:padding="8dp" />
 
     <Button
@@ -64,8 +64,8 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/button2"
-        android:elevation="4dp"
-        android:text="Login" />
+        android:text="Masuk"
+        android:textColor="@color/white"/>
 
     <TextView
         android:id="@+id/forgot"
@@ -77,7 +77,7 @@
         android:layout_marginTop="23dp"
         android:layout_marginEnd="16dp"
         android:gravity="right"
-        android:text="Forgot Password?"
+        android:text="Lupa kata sandi?"
         android:textColor="#0A2C2A"
         android:textSize="14sp"></TextView>
 
@@ -91,9 +91,9 @@
         android:layout_marginTop="23dp"
         android:layout_marginEnd="16dp"
         android:gravity="center"
-        android:text="or login with"
+        android:text="atau masuk menggunakan"
         android:textColor="#FFFFFF"
-        android:textSize="10sp">
+        android:textSize="12sp">
     </TextView>
 
     <LinearLayout
@@ -108,42 +108,12 @@
         <FrameLayout
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@drawable/another_login"
-            android:layout_marginRight="8dp">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/google"
-                android:layout_gravity="center"
-                android:scaleType="fitCenter" />
-        </FrameLayout>
-
-        <!-- Facebook Button -->
-        <FrameLayout
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:background="@drawable/another_login"
-            android:layout_marginRight="8dp">
-
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:src="@drawable/facebook"
-                android:layout_gravity="center"
-                android:scaleType="fitCenter" />
-        </FrameLayout>
-
-        <!-- Twitter Button -->
-        <FrameLayout
-            android:layout_width="50dp"
-            android:layout_height="50dp"
             android:background="@drawable/another_login">
 
             <ImageView
                 android:layout_width="20dp"
                 android:layout_height="20dp"
-                android:src="@drawable/twitter"
+                android:src="@drawable/google"
                 android:layout_gravity="center"
                 android:scaleType="fitCenter" />
         </FrameLayout>
@@ -161,23 +131,22 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="16dp"
         android:gravity="center"
-        android:text="Don’t have an account? Register now"
+        android:text="Belum punya akun? daftar sekarang"
         android:textColor="#FFFFFF"
-        android:textSize="10sp"></TextView>
+        android:textSize="12sp"></TextView>
 
     <TextView
         android:id="@+id/tc"
-        android:layout_width="380dp"
+        android:layout_width="264dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/register"
         android:layout_centerInParent="true"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="23dp"
+        android:layout_marginTop="26dp"
         android:layout_marginEnd="16dp"
         android:gravity="center"
-        android:text="By signing up, you are agree with our Terms Conditions"
+        android:text="Dengan klik tombol masuk, anda setuju dengan syarat dan ketentuan kami"
         android:textColor="#FFFFFF"
-        android:textSize="10sp">
-    </TextView>
+        android:textSize="12sp"></TextView>
 
 </RelativeLayout>
