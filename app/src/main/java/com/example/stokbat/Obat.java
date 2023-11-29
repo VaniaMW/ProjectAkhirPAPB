@@ -6,12 +6,17 @@ import android.os.Parcelable;
 public class Obat implements Parcelable {
 
     private String nama;
+    private String produkID;
     private String kategori;
     private String deskripsi;
     private int stok;
 
     public String getNama() {
         return nama;
+    }
+
+    public String getProdukID() {
+        return produkID;
     }
 
     public String getKategori() {
@@ -29,8 +34,9 @@ public class Obat implements Parcelable {
     public Obat() {
         // Konstruktor tanpa argumen diperlukan untuk Firebase
     }
-    public Obat(String nama, String kategori, String deskripsi, int stok) {
+    public Obat(String nama, String produkID, String kategori, String deskripsi, int stok) {
         this.nama = nama;
+        this.produkID = produkID;
         this.kategori = kategori;
         this.deskripsi = deskripsi;
         this.stok = stok;
@@ -39,6 +45,7 @@ public class Obat implements Parcelable {
 
     protected Obat(Parcel in) {
         nama = in.readString();
+        produkID = in.readString();
         kategori = in.readString();
         deskripsi = in.readString();
         stok = in.readInt();
@@ -64,8 +71,10 @@ public class Obat implements Parcelable {
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(nama);
+        dest.writeString(produkID);
         dest.writeString(kategori);
         dest.writeString(deskripsi);
         dest.writeInt(stok);
     }
+
 }

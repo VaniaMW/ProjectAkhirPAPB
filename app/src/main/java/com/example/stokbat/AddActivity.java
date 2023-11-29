@@ -48,13 +48,13 @@ public class AddActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // Ambil data dari EditText fields
                 String nama = editTextNama.getText().toString();
-                String ID = editTextId.getText().toString();
+                String produkID = editTextId.getText().toString();
                 String kategori = editTextKategori.getText().toString();
                 int stok = Integer.parseInt(editTextStok.getText().toString());
                 String desc = editTextDesc.getText().toString();
 
                 // Buat objek obat baru
-                Obat newObat = new Obat(nama, kategori, desc, stok);
+                Obat newObat = new Obat(nama, produkID, kategori, desc, stok);
 
                 // Simpan data obat ke Firebase Database
                 obatRef.push().setValue(newObat)

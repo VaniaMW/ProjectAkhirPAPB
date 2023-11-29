@@ -47,7 +47,7 @@ public class EditActivity extends AppCompatActivity {
                 String updatedDesc = editTextDesc.getText().toString();
 
                 // Create an updated Obat object
-                Obat updatedObat = new Obat(updatedNama, updatedKategori, updatedDesc, updatedStok);
+                Obat updatedObat = new Obat(updatedNama, updatedID, updatedKategori, updatedDesc, updatedStok);
 
                 // Return the updated Obat object to MainActivity
                 Intent resultIntent = new Intent();
