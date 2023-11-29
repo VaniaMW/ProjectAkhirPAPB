@@ -27,8 +27,8 @@ public class DetailActivity extends AppCompatActivity {
         TextView stokObatTextView = findViewById(R.id.stok);
 
         if (obat != null) {
-            namaObatTextView.setText("Nama Obat: " + obat.getNama());
-            idObatTextView.setText("ID Obat: " + obat.getProdukID());
+            namaObatTextView.setText(obat.getNama());
+            idObatTextView.setText("ID: " + obat.getProdukID());
             kategoriObatTextView.setText("Kategori: " + obat.getKategori());
             deskripsiObatTextView.setText("Deskripsi: " + obat.getDeskripsi());
             stokObatTextView.setText("Stok: " + obat.getStok());
