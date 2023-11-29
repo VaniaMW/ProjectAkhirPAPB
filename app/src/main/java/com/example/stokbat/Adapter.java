@@ -1,8 +1,8 @@
 package com.example.stokbat;
 
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.LayoutInflater;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -13,7 +13,7 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 public class Adapter extends FirebaseRecyclerAdapter<Obat, Adapter.ObatViewHolder> {
 
 //    private AdapterView.OnItemClickListener listener;
-    private OnItemClickListener listener; // Menggunakan interface OnItemClickListener yang benar
+    private OnItemClickListener listener;
 
     public Adapter(@NonNull FirebaseRecyclerOptions<Obat> options) {
         super(options);
@@ -25,9 +25,9 @@ public class Adapter extends FirebaseRecyclerAdapter<Obat, Adapter.ObatViewHolde
 
     @Override
     protected void onBindViewHolder(@NonNull ObatViewHolder holder, int position, @NonNull Obat model) {
-        holder.Nama.setText("Nama: " + model.getNama());
-        holder.Kategori.setText("Kategori: " + model.getKategori());
-        holder.Stok.setText("Stok: " + model.getStok());
+        holder.Nama.setText(": " + model.getNama());
+        holder.Kategori.setText(": " + model.getKategori());
+        holder.Stok.setText(": " + model.getStok());
 
         holder.buttonView.setOnClickListener(new View.OnClickListener() {
             @Override

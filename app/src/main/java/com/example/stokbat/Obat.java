@@ -32,7 +32,7 @@ public class Obat implements Parcelable {
     }
 
     public Obat() {
-        // Konstruktor tanpa argumen diperlukan untuk Firebase
+        // Konstruktor tanpa argumen diperlukan difirebase (fix execption error)
     }
     public Obat(String nama, String produkID, String kategori, String deskripsi, int stok) {
         this.nama = nama;
@@ -40,7 +40,6 @@ public class Obat implements Parcelable {
         this.kategori = kategori;
         this.deskripsi = deskripsi;
         this.stok = stok;
-
     }
 
     protected Obat(Parcel in) {
