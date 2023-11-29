@@ -87,4 +87,12 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
         // Hentikan mendengarkan perubahan pada Firebase Database
         adapter.stopListening();
     }
+
+    protected void onResume() {
+        super.onResume();
+        // Refresh RecyclerView jika ada perubahan setelah Activity di-resume
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
+    }
 }
