@@ -26,7 +26,12 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
 
         Obat obat1 = new Obat("Paracetamol", "Obat Bebas", "Obat pereda nyeri", 20);
 
+        //TestRecyclerView
+        Obat obat2 = new Obat("Dexamethasone", "Obat Keras", "Obat pereda radang", 200);
+
+
         daftarObat.add(obat1);
+        daftarObat.add(obat2);
 
         adapter = new Adapter(daftarObat);
         adapter.setOnItemClickListener(this); // Set the click listener
