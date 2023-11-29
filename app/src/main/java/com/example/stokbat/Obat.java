@@ -26,6 +26,9 @@ public class Obat implements Parcelable {
         return stok;
     }
 
+    public Obat() {
+        // Konstruktor tanpa argumen diperlukan untuk Firebase
+    }
     public Obat(String nama, String kategori, String deskripsi, int stok) {
         this.nama = nama;
         this.kategori = kategori;

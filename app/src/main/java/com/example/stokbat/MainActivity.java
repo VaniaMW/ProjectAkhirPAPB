@@ -2,18 +2,25 @@ package com.example.stokbat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.LayoutInflater;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import java.util.ArrayList;
-import java.util.List;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+
 
 public class MainActivity extends AppCompatActivity implements Adapter.OnItemClickListener {
 
-    private List<Obat> daftarObat;
     private Adapter adapter;
-    private static final int ADD_EDIT_REQUEST_CODE = 1;
-    private int editedPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,34 +28,63 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
         setContentView(R.layout.activity_main);
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        daftarObat = new ArrayList<>();
+        // Mengambil referensi ke Firebase Database
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference().child("obat");
 
-        Obat obat1 = new Obat("Paracetamol", "Obat Bebas", "Obat pereda nyeri", 20);
+        // Menggunakan FirebaseRecyclerOptions untuk membaca data dari Firebase Database
+        FirebaseRecyclerOptions<Obat> options =
+                new FirebaseRecyclerOptions.Builder<Obat>()
+                        .setQuery(databaseReference, Obat.class)
+                        .build();
 
-        //TestRecyclerView
-        Obat obat2 = new Obat("Dexamethasone", "Obat Keras", "Obat pereda radang", 200);
-
-
-        daftarObat.add(obat1);
-        daftarObat.add(obat2);
-
-        adapter = new Adapter(daftarObat);
+        // Inisialisasi Adapter dengan FirebaseRecyclerAdapter
+        adapter = new Adapter(options);
         adapter.setOnItemClickListener(this); // Set the click listener
 
         recyclerView.setAdapter(adapter);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // Mengambil referensi ke tombol "Tambah Obat"
+        Button tambahObatButton = findViewById(R.id.buttonTambah);
+
+        // Mengatur listener untuk tombol "Tambah Obat"
+        tambahObatButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Panggil method atau buat fungsi untuk menangani logika ketika tombol "Tambah Obat" diklik
+                openTambahObatActivity();
+            }
+        });
+
+    }
+
+    private void openTambahObatActivity() {
+        Intent intent = new Intent(this, AddActivity.class); // Ganti TambahObatActivity dengan nama Activity yang sesuai
+        startActivity(intent);
+    }
+    @Override
+    public void onViewClick(int position) {
+        // Dapatkan obat dari adapter
+        Obat obat = adapter.getItem(position);
+
+        // Intent untuk menuju ke DetailObatActivity dan mengirim data obat yang dipilih
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("Obat", obat);
+        startActivity(intent);
     }
 
     @Override
-    public void onViewClick(int position) {
-        startDetailActivity();
+    protected void onStart() {
+        super.onStart();
+        // Mulai mendengarkan perubahan pada Firebase Database
+        adapter.startListening();
     }
 
-    private void startDetailActivity() {
-        Intent intent = new Intent(this, DetailActivity.class);
-        // Pass any data needed to DetailActivity using intent.putExtra if necessary
-        startActivity(intent);
+    @Override
+    protected void onStop() {
+        super.onStop();
+        // Hentikan mendengarkan perubahan pada Firebase Database
+        adapter.stopListening();
     }
 }
-//TestPushs

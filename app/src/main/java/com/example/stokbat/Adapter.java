@@ -4,67 +4,68 @@ import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class Adapter extends RecyclerView.Adapter<Adapter.MahasiswaViewHolder> {
+public class Adapter extends FirebaseRecyclerAdapter<Obat, Adapter.ObatViewHolder> {
 
-    private List<Obat> daftarObat;
+//    private AdapterView.OnItemClickListener listener;
+    private OnItemClickListener listener; // Menggunakan interface OnItemClickListener yang benar
 
-    public interface OnItemClickListener {
-        void onViewClick(int position);
+    public Adapter(@NonNull FirebaseRecyclerOptions<Obat> options) {
+        super(options);
     }
-
-    private OnItemClickListener listener;
 
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
-    public Adapter(List<Obat> daftarObat) {
-        this.daftarObat = daftarObat;
-    }
-
-    @NonNull
     @Override
-    public MahasiswaViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.obat, parent, false);
-        return new MahasiswaViewHolder(itemView);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull MahasiswaViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Obat obat = daftarObat.get(position);
-
-        holder.Nama.setText("Nama: " + obat.getNama());
-        holder.Kategori.setText("Kategori: " + obat.getKategori());
-        holder.Stok.setText("Stok: " + obat.getStok());
+    protected void onBindViewHolder(@NonNull ObatViewHolder holder, int position, @NonNull Obat model) {
+        holder.Nama.setText("Nama: " + model.getNama());
+        holder.Kategori.setText("Kategori: " + model.getKategori());
+        holder.Stok.setText("Stok: " + model.getStok());
 
         holder.buttonView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (listener != null) {
-                    listener.onViewClick(position);
+                int adapterPosition = holder.getAdapterPosition();
+                if (listener != null && adapterPosition != RecyclerView.NO_POSITION) {
+                    listener.onViewClick(adapterPosition);
                 }
             }
         });
     }
 
+
+    @NonNull
     @Override
-    public int getItemCount() {
-        return daftarObat.size();
+    public ObatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.obat, parent, false);
+        return new ObatViewHolder(itemView);
     }
 
-    public class MahasiswaViewHolder extends RecyclerView.ViewHolder {
+    public class ObatViewHolder extends RecyclerView.ViewHolder {
         public TextView Nama;
         public TextView Kategori;
         public TextView Stok;
         public Button buttonView;
 
-        public MahasiswaViewHolder(View itemView) {
+        public ObatViewHolder(View itemView) {
             super(itemView);
             Nama = itemView.findViewById(R.id.namaobat);
             Kategori = itemView.findViewById(R.id.jenisobat);
@@ -72,5 +73,8 @@ public class Adapter extends RecyclerView.Adapter<Adapter.MahasiswaViewHolder> {
             buttonView = itemView.findViewById(R.id.buttonView);
         }
     }
-}
 
+    public interface OnItemClickListener {
+        void onViewClick(int position);
+    }
+}

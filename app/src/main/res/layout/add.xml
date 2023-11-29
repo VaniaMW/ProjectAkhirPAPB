@@ -8,7 +8,7 @@
     <EditText
         android:id="@+id/editTextNama"
         android:layout_width="380dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="56dp"
         android:hint="Nama"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,7 +19,7 @@
     <EditText
         android:id="@+id/editTextId"
         android:layout_width="380dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_below="@+id/editTextNama"
         android:layout_marginTop="12dp"
         android:hint="Id"
@@ -31,11 +31,11 @@
     <EditText
         android:id="@+id/editTextKategori"
         android:layout_width="380dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_below="@+id/editTextId"
         android:layout_marginTop="12dp"
         android:hint="Kategori"
-        android:inputType="number"
+        android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.516"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +57,7 @@
     <EditText
         android:id="@+id/editTextStok"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="12dp"
         android:ems="10"
         android:hint="Stok"
@@ -70,7 +70,7 @@
     <EditText
         android:id="@+id/editTextDesc"
         android:layout_width="380dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_marginTop="12dp"
         android:ems="10"
         android:gravity="start|top"
