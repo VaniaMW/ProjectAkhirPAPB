@@ -68,6 +68,17 @@ public class MainActivity extends AppCompatActivity implements Adapter.OnItemCli
     }
 
     @Override
+    public void onEditClick(int position) {
+        // Dapatkan obat dari adapter
+        Obat obat = adapter.getItem(position);
+
+        // Intent untuk menuju ke EditActivity dan mengirim data obat yang dipilih
+        Intent intent = new Intent(this, EditActivity.class);
+        intent.putExtra("Obat", obat);
+        startActivity(intent);
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
         // Mulai mendeteksi perubahan pada Firebase Database

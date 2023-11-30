@@ -38,6 +38,15 @@ public class Adapter extends FirebaseRecyclerAdapter<Obat, Adapter.ObatViewHolde
                 }
             }
         });
+        holder.buttonEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int adapterPosition = holder.getAdapterPosition();
+                if (listener != null && adapterPosition != RecyclerView.NO_POSITION) {
+                    listener.onEditClick(adapterPosition);
+                }
+            }
+        });
     }
 
 
@@ -53,6 +62,7 @@ public class Adapter extends FirebaseRecyclerAdapter<Obat, Adapter.ObatViewHolde
         public TextView Kategori;
         public TextView Stok;
         public Button buttonView;
+        public Button buttonEdit;
 
         public ObatViewHolder(View itemView) {
             super(itemView);
@@ -60,10 +70,12 @@ public class Adapter extends FirebaseRecyclerAdapter<Obat, Adapter.ObatViewHolde
             Kategori = itemView.findViewById(R.id.jenisobat);
             Stok = itemView.findViewById(R.id.stokobat);
             buttonView = itemView.findViewById(R.id.buttonView);
+            buttonEdit = itemView.findViewById(R.id.buttonEdit);
         }
     }
 
     public interface OnItemClickListener {
         void onViewClick(int position);
+        void onEditClick(int position);
     }
 }

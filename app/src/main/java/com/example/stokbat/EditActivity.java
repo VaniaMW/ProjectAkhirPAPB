@@ -5,7 +5,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import android.widget.Toast;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 
 public class EditActivity extends AppCompatActivity {
 
@@ -14,6 +21,7 @@ public class EditActivity extends AppCompatActivity {
     private EditText editTextKategori;
     private EditText editTextStok;
     private EditText editTextDesc;
+    private DatabaseReference obatRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,14 +34,19 @@ public class EditActivity extends AppCompatActivity {
         editTextStok = findViewById(R.id.editTextStok);
         editTextDesc = findViewById(R.id.editTextDesc);
 
-        // Retrieve the Mahasiswa object passed from MainActivity
+        // Retrieve the Obat object passed from MainActivity
         Obat obat = getIntent().getParcelableExtra("Obat");
 
-        // Populate the EditText fields with the data of the selected Mahasiswa
+        // Populate the EditText fields with the data of the selected Obat
         editTextNama.setText(obat.getNama());
+        editTextId.setText(obat.getProdukID());
         editTextKategori.setText(obat.getKategori());
         editTextStok.setText(String.valueOf(obat.getStok()));
-        editTextDesc.setText(String.valueOf(obat.getDeskripsi()));
+        editTextDesc.setText(obat.getDeskripsi());
+
+        // Menghubungkan ke Firebase Database
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        obatRef = database.getReference("obat");
 
         Button saveButton = findViewById(R.id.buttonSave);
         saveButton.setOnClickListener(new View.OnClickListener() {
@@ -49,12 +62,30 @@ public class EditActivity extends AppCompatActivity {
                 // Create an updated Obat object
                 Obat updatedObat = new Obat(updatedNama, updatedID, updatedKategori, updatedDesc, updatedStok);
 
-                // Return the updated Obat object to MainActivity
-                Intent resultIntent = new Intent();
-                resultIntent.putExtra("Obat", updatedObat);
-                setResult(RESULT_OK, resultIntent);
-                finish();
+                // Save the updated Obat object to Firebase Database
+                DatabaseReference obatRef = FirebaseDatabase.getInstance().getReference().child("obat");
+
+                obatRef.child(obat.getProdukID()).setValue(updatedObat)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                // Notifikasi perubahan berhasil disimpan
+                                Toast.makeText(EditActivity.this, "Perubahan Disimpan", Toast.LENGTH_SHORT).show();
+                                // Kembali ke MainActivity atau halaman sebelumnya
+                                finish();
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                // Penanganan jika gagal menyimpan perubahan
+                                Toast.makeText(EditActivity.this, "Gagal Menyimpan Perubahan: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        });
+
+
             }
         });
+
     }
 }
