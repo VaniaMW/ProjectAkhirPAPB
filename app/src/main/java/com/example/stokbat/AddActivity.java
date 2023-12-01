@@ -54,7 +54,7 @@ public class AddActivity extends AppCompatActivity {
                 Obat newObat = new Obat(nama, produkID, kategori, desc, stok);
 
                 // Simpan data obat ke Firebase Database
-                obatRef.child(produkID).setValue(newObat)
+                obatRef.push().setValue(newObat)
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
