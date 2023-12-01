@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -17,7 +19,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 public class EditActivity extends AppCompatActivity {
 
     private EditText editTextNama;
-    private EditText editTextId;
+    private TextView editTextId;
     private EditText editTextKategori;
     private EditText editTextStok;
     private EditText editTextDesc;
