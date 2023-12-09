@@ -49,7 +49,7 @@ public class DetailActivity extends AppCompatActivity {
         Obat obat = getIntent().getParcelableExtra("Obat");
 
         // Menampilkan data obat pada tampilan detail
-        //displayObatDetail(obat);
+        displayObatDetail(obat, null);
         imageView2 = findViewById(R.id.imageView2);
         imageView2.setOnClickListener(view -> selectImage());
 
@@ -92,7 +92,7 @@ public class DetailActivity extends AppCompatActivity {
             Thread thread = new Thread(() -> {
                 try {
                     InputStream inputStream = getContentResolver().openInputStream(path);
-                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream); // Perbaikan di sini
+                    Bitmap bitmap = BitmapFactory.decodeStream(inputStream);
                     imageView2.post(() -> {
                         imageView2.setImageBitmap(bitmap);
                     });
@@ -119,6 +119,7 @@ public class DetailActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Void aVoid) {
                             Toast.makeText(getApplicationContext(), "Perubahan berhasil disimpan", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -162,10 +163,9 @@ public class DetailActivity extends AppCompatActivity {
                             if (task.isSuccessful()) {
                                 Uri downloadUri = task.getResult();
                                 imageUrl = downloadUri.toString();
-                                Obat obat = getIntent().getParcelableExtra("Obat");
-                                displayObatDetail(obat, imageUrl);
-                                // Panggil saveChangesToDatabase() setelah mendapatkan URL gambar
-                                saveChangesToDatabase();
+                                Toast.makeText(getApplicationContext(), "Gambar berhasil diunggah", Toast.LENGTH_SHORT).show();
+                                // Tambahkan kode untuk kembali ke MainActivity setelah selesai
+                                finish(); // Menutup DetailActivity
                             } else {
                                 Toast.makeText(getApplicationContext(), "Gagal", Toast.LENGTH_SHORT).show();
                             }
@@ -191,10 +191,12 @@ public class DetailActivity extends AppCompatActivity {
             deskripsiObatTextView.setText("Deskripsi: " + obat.getDeskripsi());
             stokObatTextView.setText("Stok: " + obat.getStok());
 
-            Glide.with(this)
-                    .load(imageUrl);
-            //.into(fotoObat);
-            upload();
+            if (imageUrl != null) {
+                Glide.with(this)
+                        .load(imageUrl);
+                //.into(fotoObat);
+                upload();
+            }
         }
     }
 }
